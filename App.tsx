@@ -21,7 +21,7 @@ function Button({ children, onClick, className = '', variant = 'primary', disabl
     const baseClasses = "w-full text-center font-bold py-3 px-4 rounded-xl shadow-md transition-transform transform hover:scale-105 active:scale-100 focus:outline-none focus:ring-2 focus:ring-offset-2";
     const variants = {
         primary: 'bg-purple-600 text-white hover:bg-purple-700 focus:ring-purple-500',
-        secondary: 'bg-white text-purple-600 border border-purple-200 hover:bg-purple-50 focus:ring-purple-500',
+        secondary: 'bg-purple-100 text-purple-800 border border-purple-300 hover:bg-purple-200 focus:ring-purple-400',
     };
     const disabledClasses = 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none';
     return <button onClick={onClick} disabled={disabled} className={`${baseClasses} ${disabled ? disabledClasses : variants[variant]} ${className}`}>{children}</button>;
@@ -30,7 +30,7 @@ function Button({ children, onClick, className = '', variant = 'primary', disabl
 // FIX: Changed Card from const arrow function to function declaration.
 function Card({ children, className = '', onClick = null }) {
     const cursorClass = onClick ? 'cursor-pointer' : '';
-    return <div onClick={onClick} className={`bg-white rounded-2xl shadow-lg p-6 w-full ${className} ${cursorClass}`}>{children}</div>;
+    return <div onClick={onClick} className={`bg-white rounded-2xl shadow-lg p-6 w-full text-gray-900 ${className} ${cursorClass}`}>{children}</div>;
 }
 
 const EmojiDisplay = ({ emoji }) => {
@@ -346,7 +346,7 @@ const VerbTensesComponent = ({ exercise, onCorrect, onIncorrect }) => {
     return (
          <div className="space-y-4">
             <p className="text-gray-800 text-lg font-medium">{exercise.question}</p>
-            <p className="text-gray-600 text-center p-3 bg-gray-100 rounded-lg italic">"{exercise.description}"</p>
+            <p className="text-gray-700 text-center p-3 bg-gray-100 rounded-lg italic">"{exercise.description}"</p>
             <div className="space-y-6">
                 {exercise.verbTenseItems.map(item => {
                     const selectedTime = answers[item.id];
@@ -530,14 +530,14 @@ const TrajectoryScreen = () => {
                 </header>
                 <div className="mb-6">
                     <h1 className="text-3xl font-bold text-purple-900">Lengua Trayecto 1</h1>
-                    <p className="text-gray-600">Manifestaciones artísticas: mitos y leyendas</p>
+                    <p className="text-gray-700">Manifestaciones artísticas: mitos y leyendas</p>
                 </div>
 
                 <Card className="mb-6">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="font-bold text-lg text-gray-800">Ejercicio {currentExercise.id} de {totalExercises - 2}</p>
-                            <p className="text-gray-600">{completedSet.size} completados</p>
+                            <p className="text-gray-700">{completedSet.size} completados</p>
                         </div>
                         <div className="flex items-center text-yellow-500 font-bold text-2xl">
                             <StarIcon className="w-8 h-8 mr-2 fill-current" />
@@ -584,7 +584,7 @@ const TrajectoryScreen = () => {
                 </Card>
 
                 <footer className="flex justify-between items-center mt-6">
-                    <button onClick={handlePrev} disabled={currentIndex === 0} className="p-3 rounded-full bg-white shadow-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button onClick={handlePrev} disabled={currentIndex === 0} className="p-3 rounded-full bg-white text-gray-800 shadow-md hover:bg-gray-100 hover:text-purple-800 disabled:opacity-50 disabled:cursor-not-allowed">
                         <ArrowLeftIcon />
                     </button>
                      <button onClick={handleNext} disabled={currentIndex === totalExercises - 1 || currentExercise.type === ExerciseType.Info}
@@ -619,7 +619,7 @@ const HomeScreen = () => {
                 <div className="flex justify-between items-center">
                     <div>
                         <h4 className="text-2xl font-bold text-purple-900">Tercero de Primaria</h4>
-                        <p className="text-gray-600">Exámenes trimestrales disponibles</p>
+                        <p className="text-gray-700">Exámenes trimestrales disponibles</p>
                         <div className="flex space-x-2 mt-4">
                             <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Lengua</span>
                             <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Matemáticas</span>
@@ -650,11 +650,11 @@ const TrimesterScreen = () => {
                     <div className="bg-purple-600 text-white w-12 h-12 flex items-center justify-center rounded-lg font-bold text-2xl">1</div>
                     <div>
                         <h2 className="text-xl font-bold text-gray-900">Primer Trimestre</h2>
-                        <p className="text-gray-600">5 exámenes disponibles</p>
+                        <p className="text-gray-700">5 exámenes disponibles</p>
                         <p className="mt-2 text-green-700 bg-green-100 px-2 py-0.5 rounded-full inline-block text-sm font-semibold">✓ Disponible</p>
                     </div>
                 </Card>
-                 <Card className="flex items-start space-x-6 bg-gray-100 text-gray-500">
+                 <Card className="flex items-start space-x-6 bg-gray-100 text-gray-600">
                     <div className="bg-gray-300 text-white w-12 h-12 flex items-center justify-center rounded-lg font-bold text-2xl">2</div>
                     <div>
                         <h2 className="text-xl font-bold">Segundo Trimestre</h2>
@@ -662,7 +662,7 @@ const TrimesterScreen = () => {
                         <p className="mt-2 flex items-center text-sm"><LockIcon className="w-4 h-4 mr-1"/> Bloqueado</p>
                     </div>
                 </Card>
-                 <Card className="flex items-start space-x-6 bg-gray-100 text-gray-500">
+                 <Card className="flex items-start space-x-6 bg-gray-100 text-gray-600">
                     <div className="bg-gray-300 text-white w-12 h-12 flex items-center justify-center rounded-lg font-bold text-2xl">3</div>
                     <div>
                         <h2 className="text-xl font-bold">Tercer Trimestre</h2>
@@ -694,7 +694,7 @@ const ExamScreen = () => {
             <div className="max-w-2xl mx-auto space-y-4">
                 {exams.map((exam, i) => (
                     <Card key={i} onClick={() => !exam.locked && setScreen(Screen.Trajectory)}
-                        className={`${exam.locked ? 'bg-gray-100 text-gray-500' : 'hover:ring-2 hover:ring-purple-400 transition'}`}>
+                        className={`${exam.locked ? 'bg-gray-100 text-gray-600' : 'hover:ring-2 hover:ring-purple-400 transition'}`}>
                         <div className="flex items-center">
                             <div className={`p-3 rounded-lg mr-4 ${exam.locked ? 'bg-gray-300' : 'bg-purple-100 text-purple-700'}`}>{exam.icon}</div>
                             <div className="flex-grow">
@@ -741,7 +741,7 @@ export default function App() {
 
     return (
         <AppContext.Provider value={contextValue}>
-            <main className="bg-gray-50 min-h-screen">
+            <main className="bg-gray-50 min-h-screen text-gray-900">
                 {renderScreen()}
             </main>
         </AppContext.Provider>
