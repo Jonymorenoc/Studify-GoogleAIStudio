@@ -1,0 +1,7 @@
+{
+  "name": "Studyfy: Aventura de Aprendizaje",
+  "description": "An interactive and gamified learning app for primary school children to study subjects like language through fun exercises, powered by AI for an enhanced experience.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
