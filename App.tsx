@@ -3,7 +3,8 @@ import { exercises as allExercises, readingTexts } from './constants';
 import { Screen, UserProgress, Exercise, ExerciseType, ReadingText, MultipleChoiceOption, MatchingPair, ClassificationItem, VerbTenseItem } from './types';
 
 // --- ICONS ---
-const Icon = ({ children, className = '' }) => <div className={`inline-block ${className}`}>{children}</div>;
+// FIX: Changed Icon from const arrow function to function declaration.
+function Icon({ children, className = '' }) { return <div className={`inline-block ${className}`}>{children}</div>; }
 const StarIcon = ({ className = '' }) => <Icon className={className}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></Icon>;
 const BookOpenIcon = ({ className = '' }) => <Icon className={className}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></Icon>;
 const ArrowLeftIcon = ({ className = '' }) => <Icon className={className}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></Icon>;
@@ -15,7 +16,8 @@ const GraduationCapIcon = ({ className = '' }) => <Icon className={className}><s
 const TrophyIcon = ({ className = '' }) => <Icon className={className}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-trophy"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21-.19.08-.44.15-.73.23-.29.08-.6.16-.9.23-.3.07-.59.12-.8.12H8c-.21 0-.5-.05-.8-.12-.3-.07-.6-.15-.9-.23-.29-.08-.54-.15-.73-.23-.5-.23-.97-.66-.97-1.21V14.66c0-.13.03-.26.09-.37l.81-1.51c.09-.17.2-.34.34-.5.14-.16.32-.3.5-.41.18-.11.39-.19.6-.23.21-.04.43-.06.65-.06h.1c.22 0 .44.02.65.06.21.04.42.12.6.23.18.11.36.25.5.41.14.16.25.33.34.5l.81 1.51c.06.11.09.24.09.37z"></path></svg></Icon>;
 
 // --- UI COMPONENTS ---
-const Button = ({ children, onClick, className = '', variant = 'primary', disabled = false }) => {
+// FIX: Changed Button from const arrow function to function declaration.
+function Button({ children, onClick, className = '', variant = 'primary', disabled = false }) {
     const baseClasses = "w-full text-center font-bold py-3 px-4 rounded-xl shadow-md transition-transform transform hover:scale-105 active:scale-100 focus:outline-none focus:ring-2 focus:ring-offset-2";
     const variants = {
         primary: 'bg-purple-600 text-white hover:bg-purple-700 focus:ring-purple-500',
@@ -23,12 +25,13 @@ const Button = ({ children, onClick, className = '', variant = 'primary', disabl
     };
     const disabledClasses = 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none';
     return <button onClick={onClick} disabled={disabled} className={`${baseClasses} ${disabled ? disabledClasses : variants[variant]} ${className}`}>{children}</button>;
-};
+}
 
-const Card = ({ children, className = '', onClick = null }) => {
+// FIX: Changed Card from const arrow function to function declaration.
+function Card({ children, className = '', onClick = null }) {
     const cursorClass = onClick ? 'cursor-pointer' : '';
     return <div onClick={onClick} className={`bg-white rounded-2xl shadow-lg p-6 w-full ${className} ${cursorClass}`}>{children}</div>;
-};
+}
 
 const EmojiDisplay = ({ emoji }) => {
     if (!emoji) return null;
@@ -86,7 +89,6 @@ const MultipleChoiceComponent = ({ exercise, onCorrect, onIncorrect }) => {
                     </div>
                 ))}
             </div>
-            {status === 'incorrect' && <p className="text-red-600 text-center">¡Ups! Inténtalo de nuevo.</p>}
             <Button onClick={handleCheck} disabled={!selected || status === 'correct'} >
                 Verificar Respuesta
             </Button>
@@ -138,7 +140,6 @@ const MultiSelectComponent = ({ exercise, onCorrect, onIncorrect }) => {
                     </div>
                 ))}
             </div>
-            {status === 'incorrect' && <p className="text-red-600 text-center">¡Revisa tus respuestas e inténtalo de nuevo!</p>}
             <Button onClick={handleCheck} disabled={selected.length === 0 || status === 'correct'}>
                 Verificar
             </Button>
@@ -397,12 +398,17 @@ const FeedbackAnimation = ({ show, correct }) => {
     if (correct) {
         return (
             <div className="absolute inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-10 rounded-2xl">
-                <span className="text-7xl animate-bounce">🎉</span>
+                <span className="text-7xl animate-tada">🎉</span>
                 <p className="text-green-600 font-bold text-2xl mt-4">+3 ⭐ ¡Genial!</p>
             </div>
         )
     }
-    return null; // Or implement incorrect feedback animation
+    return (
+        <div className="absolute inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-10 rounded-2xl">
+            <span className="text-7xl animate-shake">😟</span>
+            <p className="text-red-600 font-bold text-2xl mt-4">¡Inténtalo de nuevo!</p>
+        </div>
+    );
 };
 
 
@@ -456,7 +462,12 @@ const TrajectoryScreen = () => {
         }, 2000);
     }, [completedSet, completeExercise, currentExercise.id, handleNext]);
 
-    const handleIncorrect = () => { /* Simple feedback for now */ };
+    const handleIncorrect = () => {
+        setFeedback({ show: true, correct: false });
+        setTimeout(() => {
+            setFeedback({ show: false, correct: false });
+        }, 1500);
+    };
 
     const renderExercise = () => {
         switch (currentExercise.type) {
